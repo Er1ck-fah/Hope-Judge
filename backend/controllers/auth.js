@@ -106,6 +106,57 @@ export async function Login(req, res) {
 }
 
 /**
+ * @route Put /auth/logout
+ * @desc Update password
+ * @access Public
+ */
+
+export async function UpdatePassword(req, res) {
+  const { email } = req.body;
+  try {
+    // Check if user exists
+    const user = await User.findOne({ email }).select("+password");
+    if (!user)
+      return res.status(401).json({
+        status: "failed",
+        data: [],
+        message:
+          "Invalid email or old password. Please try again with the correct credentials.",
+      });
+    // if user exists
+    // validate password
+    const isPasswordValid = await bcrypt.compare(
+      `${req.body.password}`,
+      user.password
+    );
+    // if not valid, return unathorized response
+    if (!isPasswordValid)
+      return res.status(401).json({
+        status: "failed",
+        data: [],
+        message:
+          "Invalid old password. Please try again with the correct credentials.",
+      });
+    user.password = req.body.newpassword;
+    const updateUser = await user.save(); // update this user into the database
+    const { role, ...user_data } = updateUser._doc;
+    res.status(200).json({
+      status: "success",
+      data: [user_data],
+      message: "Your password has been successfully updated.",
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      code: 500,
+      data: [],
+      message: "Internal Server Error",
+    });
+  }
+  res.end();
+}
+
+/**
  * @route POST /auth/logout
  * @desc Logout user
  * @access Public
