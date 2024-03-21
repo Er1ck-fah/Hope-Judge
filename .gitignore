@@ -1,2 +1,4 @@
 /backend/node_modules
+/api
+example.http
 .env

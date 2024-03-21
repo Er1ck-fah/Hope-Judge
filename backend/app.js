@@ -6,15 +6,15 @@ import { PORT, URI } from "./libs/config.js";
 import App from "./routes/index.js";
 
 // === 1- CREATE SERVER ===
-const server = express();
+const server = new express();
 
 // CONFIGURE HEADER INFORMATION
 // Allow request from any source. In real production, this should be limited to allowed origins only
-server.use(cors);
-server.disable("x-powered-by"); //Reduce fingerprinting
+
+server.use(cors());
 server.use(cookieParser());
-server.use(express.urlencoded({ extended: false }));
-server.use(express.json);
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
 
 // === 2 - CONNECT DATABASE ===
 // Set up mongoose's promise to global promise

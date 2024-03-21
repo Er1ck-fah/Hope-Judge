@@ -1,21 +1,21 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { SECRET_ACCESS_TOKEN } from "../libs/config.js";
 
 const UserSchema = new mongoose.Schema(
   {
     first_name: {
       type: String,
       required: "Your firstname is required",
-      max: 50,
     },
     last_name: {
       type: String,
       required: "Your lastname is required",
-      max: 50,
     },
     pseudo: {
       type: String,
-      max: 25,
+      max: 50,
     },
     email: {
       type: String,
@@ -26,17 +26,21 @@ const UserSchema = new mongoose.Schema(
     },
     photo: {
       type: String,
-      max: 50,
+      max: 100,
     },
     telephone: {
       type: String,
-      max: 50,
+      max: 100,
     },
     password: {
       type: String,
       required: "Your password is required",
-      select: false,
-      max: 25,
+      max: 50,
+    },
+    group_user: {
+      type: String,
+      enum: ["admin", "federation", "judge", "member"],
+      default: "member",
     },
     role: {
       type: String,
@@ -62,5 +66,14 @@ UserSchema.pre("save", function (next) {
     });
   });
 });
+
+UserSchema.methods.generateAccessJWT = function () {
+  let payload = {
+    id: this._id,
+  };
+  return jwt.sign(payload, SECRET_ACCESS_TOKEN, {
+    expiresIn: "20m",
+  });
+};
 
 export default mongoose.model("users", UserSchema);
