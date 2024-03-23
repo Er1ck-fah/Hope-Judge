@@ -106,7 +106,7 @@ export async function Login(req, res) {
 }
 
 /**
- * @route Put /auth/logout
+ * @route Put /auth/updatePassword
  * @desc Update password
  * @access Public
  */
