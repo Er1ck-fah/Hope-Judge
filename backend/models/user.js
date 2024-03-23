@@ -47,6 +47,10 @@ const UserSchema = new mongoose.Schema(
       required: true,
       default: "0x01",
     },
+    is_enable: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );
@@ -76,4 +80,4 @@ UserSchema.methods.generateAccessJWT = function () {
   });
 };
 
-export default mongoose.model("users", UserSchema);
+export default mongoose.model("Users", UserSchema);

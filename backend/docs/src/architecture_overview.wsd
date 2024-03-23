@@ -1,0 +1,135 @@
+# diagram
+
+```plantuml
+@startuml
+class Dummy {
+  String data
+  void methods()
+}
+
+class Flight {
+   flightNumber : Integer
+   departureTime : Date
+}
+@enduml
+@startuml
+  class User {
+    - String first_name
+    - String last_name
+    - String pseudo
+    - String email
+    - String telephone
+    - String photo
+    - String goup_user
+    
+    +void getName()
+    +void getNumber()
+    +String toString()
+  }
+@enduml
+@startuml
+
+  class Pays{
+    -int idPays
+    -String code_pays
+    -String nom_pays
+    -String logo_pays
+    -String description_pays
+
+    + void createPays()
+    + void readPays()
+    + void updatePays()
+    + void deletePays()
+  }
+
+@enduml
+@startuml
+
+  class Organisation{
+    -int idOrganisation
+    -String code_organisation
+    -String nom_organisation
+    -String logo_organisation
+    -String description_organisation
+
+    + void createOrganisation()
+    + void readOrganisation()
+    + void updateOrganisation()
+    + void deleteOrganisation()
+  }
+
+@enduml
+@startuml
+
+  class Evenement{
+    -int idEvenement
+    -String code_evenement
+    -String nom_evenement
+    -String logo_evenement
+    -String description_evenement
+    -
+
+    + void createEvenement()
+    + void readEvenement()
+    + void updateEvenement()
+    + void deleteEvenement()
+  }
+
+@enduml
+@startuml
+class event_categorie{
+    -int idEvenement
+    -int idCategorie
+    -text other_details 
+}
+@enduml
+@startuml
+
+  class Categorie{
+    -int idCategorie
+    -String code_categorie
+    -String nom_categorie
+    -String logo_categorie
+    -String description_categorie
+
+    + void createCategorie()
+    + void readCategorie()
+    + void updateCategorie()
+    + void deleteCategorie()
+  }
+
+@enduml
+@startuml
+
+  class Rubrique{
+    -int idRubrique
+    -String code_rubrique
+    -String nom_rubrique
+    -String logo_rubrique
+    -String description_rubrique
+
+    + void createRubrique()
+    + void readRubrique()
+    + void updateRubrique()
+    + void deleteRubrique()
+  }
+
+@enduml
+@startuml
+
+  class Membre{
+    -int idMembre
+    -String matricule_membre
+    -String group_membre
+    -Date date_affiliation
+    -Date date_expiration
+    -String qr_code
+    -int is_valid
+
+    + void createMembre()
+    + void readMembre()
+    + void updateMembre()
+    + void deleteMembre()
+  }
+
+@enduml
