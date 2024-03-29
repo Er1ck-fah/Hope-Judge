@@ -17,6 +17,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       max: 50,
     },
+    sexe: {
+      type: String,
+      enum: ["M", "F"],
+    },
     email: {
       type: String,
       required: "Your email is required",

@@ -6,6 +6,7 @@ const RubriqCatSchema = {
 
   is_enable: {
     type: Boolean,
+    default: true,
   },
   rubrique: { type: mongoose.Types.ObjectId, ref: "Rubrique" },
   categorie: { type: mongoose.Types.ObjectId, ref: "Categorie" },

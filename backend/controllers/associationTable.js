@@ -1,5 +1,6 @@
 import Event_Rubriq from "../models/event_rubriq.js";
 import Organ_Event from "../models/organ_event.js";
+import Rubriq_Categorie from "../models/rubriq_cat.js";
 
 // === Organisation - Evenement === //
 export async function GetOrganisationEvent(req, res) {
@@ -102,6 +103,60 @@ export async function UpdateEventRubrique(req, res) {
       { new: true }
     );
     res.status(200).send(event_rubriq);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error);
+  }
+}
+
+// == Rubrique -- Categorie  == //
+
+export async function GetRubriqueCategorie(req, res) {
+  try {
+    const rubriq_categorie = await Rubriq_Categorie.find({});
+    res.send(rubriq_categorie).status(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error);
+  }
+}
+export async function GetRubriqueCategorieById(req, res) {
+  const { id } = req.params;
+  try {
+    const rubriq_cat = await Rubriq_Categorie.find({ rubrique: id });
+    res.send(rubriq_cat).status(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error);
+  }
+}
+export async function RubriqueCategorie(req, res) {
+  const { evenement, rubrique, date_affectation } = req.body;
+
+  try {
+    const rubriq_cat = new Rubrique_Categorie({
+      rubrique,
+      categorie,
+      date_affectation,
+    });
+    await rubriq_cat.save();
+    res.status(200).send(rubriq_cat);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error);
+  }
+}
+export async function UpdateRubriqueCategorie(req, res) {
+  const { id } = req.params;
+  const { rubrique, categorie, date_affectation } = req.body;
+
+  try {
+    const rubriq_cat = await Rubriq_Categorie.findByIdAndUpdate(
+      id,
+      { rubrique, categorie, date_affectation },
+      { new: true }
+    );
+    res.status(200).send(rubriq_cat);
   } catch (error) {
     console.error(error);
     res.status(500).send(error);
