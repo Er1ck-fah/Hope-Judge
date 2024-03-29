@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const MembreSchema = new mongoose.Schema(
   {
-    matricule_membre: {
+    matricule_judge: {
       type: String,
       required: true,
       unique: true,

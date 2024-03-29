@@ -6,6 +6,7 @@ const EventRubriqSchema = {
 
   is_enable: {
     type: Boolean,
+    default: true,
   },
   evenement: { type: mongoose.Types.ObjectId, ref: "Evenement" },
   rubrique: { type: mongoose.Types.ObjectId, ref: "Rubrique" },
